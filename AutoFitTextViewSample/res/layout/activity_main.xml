@@ -98,6 +98,15 @@
             android:layout_alignTop="@+id/minusLineCountButton"
             android:gravity="center_vertical"
             android:text="max lines count:" />
+
+        <TextView
+            android:id="@+id/textViewInfo0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/heightSeekBar"
+            android:gravity="center_vertical"
+            android:text="Info0" />
     </RelativeLayout>
 
     <FrameLayout

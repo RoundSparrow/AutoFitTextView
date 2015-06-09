@@ -30,6 +30,7 @@ public class MainActivity extends Activity
   private SeekBar   _widthSeekBar;
   private SeekBar   _heightSeekBar;
   private TextView  _linesCountTextView;
+    private TextView _info0TextView;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState)
@@ -75,6 +76,7 @@ public class MainActivity extends Activity
     _heightSeekBar.setOnSeekBarChangeListener(seekBarChangeListener);
     _widthSeekBar.setOnSeekBarChangeListener(seekBarChangeListener);
     _linesCountTextView=(TextView)findViewById(R.id.linesCountTextView);
+      _info0TextView=(TextView)findViewById(R.id.textViewInfo0);
     findViewById(R.id.plusLineCountButton).setOnClickListener(new OnClickListener()
       {
         @Override
@@ -126,12 +128,15 @@ public class MainActivity extends Activity
     textView.setLayoutParams(new LayoutParams(width,height));
     textView.setBackgroundColor(0xff00ff00);
     String text=_contentEditText.getText().toString();
-      // ToDo: A mode can be implemented to force breaking on characters instead of words
+      // ToDo: A mode can be implemented to force breaking on characters instead of words - reference: http://stackoverflow.com/questions/5118367/android-how-to-wrap-text-by-chars-not-by-words10
       // text = text.replace(" ", "\u00A0");
     textView.setText(text);
       android.util.Log.d("OUTSIZE", "w" + width + " h" + height + " mh" + maxHeight + " ml" + maxLinesCount
-              + " Zlc" + textView.getLineCount() + " Z" + textView.getText()
+              + " Zlc" + textView.getLineCount() + " Z" + textView.getText() + " Zs" + textView.getTextSize()
               + " text:" + text);
+      _info0TextView.setText("INFO " + textView.getTextSize() + " h" + textView.getHeight() + ":" + height + " w" + textView.getWidth() + ":" + width + " mh" + maxHeight
+              + " ~" + textView.getLineCount()
+        );
       _textViewcontainer.addView(textView);
     }
 

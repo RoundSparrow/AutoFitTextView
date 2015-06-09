@@ -98,18 +98,27 @@ public class AutoResizeTextView extends TextView
         // return early if we have more lines
         if(getMaxLines()!=NO_LINE_LIMIT&&layout.getLineCount()>getMaxLines())
           return 1;
+
+
         textRect.bottom=layout.getHeight();
         int maxWidth=-1;
+          traceA += "lc " + layout.getLineCount() + " ";
         for(int i=0;i<layout.getLineCount();i++) {
+          float targetA = layout.getLineRight(i) - layout.getLineLeft(i);
+          int targetAI = Math.round(targetA + 0.5f);
           traceA += i + " ";
-          if (maxWidth < layout.getLineRight(i) - layout.getLineLeft(i)) {
-            maxWidth = (int) layout.getLineRight(i) - (int) layout.getLineLeft(i);
-            traceA += ":" + maxWidth + " ";
+          if (maxWidth < targetAI) {
+            maxWidth = targetAI;
+            traceA += ":" + maxWidth + "e" + layout.getEllipsisCount(i) + " ";
+          }
+          else
+          {
+            traceA += "*" + maxWidth + "e" + layout.getEllipsisCount(i) + " ";
           }
         }
         textRect.right=maxWidth;
         }
-        android.util.Log.d("LINEC", "LINES " + getLayout().getLineCount() + " traceA: " + traceA);
+        android.util.Log.d("LINEC", "LINES " + getLayout().getLineCount() + " mw" + textRect.right + " traceA: " + traceA);
       textRect.offsetTo(0,0);
       if(availableSpace.contains(textRect))
       // may be too small, don't worry we will find the best match
