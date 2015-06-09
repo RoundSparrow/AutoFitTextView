@@ -127,7 +127,8 @@ public class MainActivity extends Activity
     textView.setBackgroundColor(0xff00ff00);
     final String text=_contentEditText.getText().toString();
     textView.setText(text);
-    _textViewcontainer.addView(textView);
+      android.util.Log.d("OUTSIZE", "w" + width + " h" + height + " mh" + maxHeight + " ml" + maxLinesCount + " text:" + text);
+      _textViewcontainer.addView(textView);
     }
 
   // private String getRandomText()
