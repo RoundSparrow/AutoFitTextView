@@ -74,7 +74,7 @@ public class AutoResizeTextView extends TextView
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    public int onTestSize(final int suggestedSize,final RectF availableSPace)
+    public int onTestSize(final int suggestedSize,final RectF availableSpace)
       {
       paint.setTextSize(suggestedSize);
       final String text=getText().toString();
@@ -98,7 +98,7 @@ public class AutoResizeTextView extends TextView
         textRect.right=maxWidth;
         }
       textRect.offsetTo(0,0);
-      if(availableSPace.contains(textRect))
+      if(availableSpace.contains(textRect))
       // may be too small, don't worry we will find the best match
         return -1;
       // else, too big
