@@ -72,6 +72,13 @@ public class AutoResizeTextView extends TextView
     {
     final RectF textRect=new RectF();
 
+      /**
+       * @param suggestedSize  Size of text to be tested
+       * @param availableSpace available space in which text must fit
+       * @return an integer < 0 if after applying {@code suggestedSize} to
+       * text, it takes less space than {@code availableSpace}, > 0
+       * otherwise
+       */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public int onTestSize(final int suggestedSize,final RectF availableSpace)
@@ -79,6 +86,7 @@ public class AutoResizeTextView extends TextView
       paint.setTextSize(suggestedSize);
       final String text=getText().toString();
       final boolean singleLine=getMaxLines()==1;
+        String traceA = "";
       if(singleLine)
         {
         textRect.bottom=paint.getFontSpacing();
@@ -92,11 +100,16 @@ public class AutoResizeTextView extends TextView
           return 1;
         textRect.bottom=layout.getHeight();
         int maxWidth=-1;
-        for(int i=0;i<layout.getLineCount();i++)
-          if(maxWidth<layout.getLineRight(i)-layout.getLineLeft(i))
-            maxWidth=(int)layout.getLineRight(i)-(int)layout.getLineLeft(i);
+        for(int i=0;i<layout.getLineCount();i++) {
+          traceA += i + " ";
+          if (maxWidth < layout.getLineRight(i) - layout.getLineLeft(i)) {
+            maxWidth = (int) layout.getLineRight(i) - (int) layout.getLineLeft(i);
+            traceA += ":" + maxWidth + " ";
+          }
+        }
         textRect.right=maxWidth;
         }
+        android.util.Log.d("LINEC", "LINES " + getLayout().getLineCount() + " traceA: " + traceA);
       textRect.offsetTo(0,0);
       if(availableSpace.contains(textRect))
       // may be too small, don't worry we will find the best match

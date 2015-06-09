@@ -125,9 +125,13 @@ public class MainActivity extends Activity
     textView.setEnableSizeCache(false);
     textView.setLayoutParams(new LayoutParams(width,height));
     textView.setBackgroundColor(0xff00ff00);
-    final String text=_contentEditText.getText().toString();
+    String text=_contentEditText.getText().toString();
+      // ToDo: A mode can be implemented to force breaking on characters instead of words
+      // text = text.replace(" ", "\u00A0");
     textView.setText(text);
-      android.util.Log.d("OUTSIZE", "w" + width + " h" + height + " mh" + maxHeight + " ml" + maxLinesCount + " text:" + text);
+      android.util.Log.d("OUTSIZE", "w" + width + " h" + height + " mh" + maxHeight + " ml" + maxLinesCount
+              + " Zlc" + textView.getLineCount() + " Z" + textView.getText()
+              + " text:" + text);
       _textViewcontainer.addView(textView);
     }
 
